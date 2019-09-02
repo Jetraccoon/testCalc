@@ -1,3 +1,6 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Expression {
     int number1;
     int number2;
@@ -7,19 +10,21 @@ public class Expression {
         this.number2 = number2;
     }
 
-    void plus(){
-        System.out.println("Результат: " + (number1+number2));
+    int plus(){
+        return number1+number2;
     }
 
-    void minus(){
-        System.out.println("Результат: " + (number1-number2));
+    int minus(){
+        return number1-number2;
     }
 
-    void multipli(){
-        System.out.println("Результат: " + (number1*number2));
+    int multipli(){
+        return number1*number2;
     }
 
-    void division(){
-        System.out.println("Результат: " + (number1/number2));
+    double division(){
+        return (double) number1/number2;
     }
+
+
 }

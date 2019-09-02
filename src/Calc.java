@@ -1,7 +1,5 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Calc {
     public static void main(String[] args) {
@@ -20,16 +18,16 @@ public class Calc {
             Expression expression = new Expression(Integer.parseInt(expressionStr[0]),Integer.parseInt(expressionStr[2]));
             switch (expressionStr[1].charAt(0)){
                 case '+':
-                    expression.plus();
+                    System.out.println("Результат: " + (expression.plus()));
                     return;
                 case '-':
-                    expression.minus();
+                    System.out.println("Результат: " + (expression.minus()));
                     return;
                 case '*':
-                    expression.multipli();
+                    System.out.println("Результат: " + (expression.multipli()));
                     return;
                 case '/':
-                    expression.division();
+                    System.out.println("Результат: " + (expression.division()));
                     return;
                 default:
                     System.out.println("Неправильно задана операция!");
@@ -41,16 +39,20 @@ public class Calc {
             Expression expression = new Expression(romeNumbers.indexOf(expressionStr[0])+1,romeNumbers.indexOf(expressionStr[2])+1);
             switch (expressionStr[1].charAt(0)){
                 case '+':
-                    expression.plus();
+                    System.out.println("Результат: " + (RomanNumerals(expression.plus())));
                     return;
                 case '-':
-                    expression.minus();
+                    System.out.println("Результат: " + (RomanNumerals(expression.minus())));
                     return;
                 case '*':
-                    expression.multipli();
+                    System.out.println("Результат: " + (RomanNumerals(expression.multipli())));
                     return;
                 case '/':
-                    expression.division();
+                    double k = (double) expression.division();
+                    if(k % 1 != 0)
+                        System.out.println("Результат: " + (k));
+                    else
+                        System.out.println("Результат: " + (RomanNumerals((int) k)));
                     return;
                 default:
                     System.out.println("Неправильно задана операция!");
@@ -69,5 +71,39 @@ public class Calc {
             return false;
         }
         return true;
+    }
+
+    public static String RomanNumerals(int Int) {
+        LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
+        roman_numerals.put("M", 1000);
+        roman_numerals.put("CM", 900);
+        roman_numerals.put("D", 500);
+        roman_numerals.put("CD", 400);
+        roman_numerals.put("C", 100);
+        roman_numerals.put("XC", 90);
+        roman_numerals.put("L", 50);
+        roman_numerals.put("XL", 40);
+        roman_numerals.put("X", 10);
+        roman_numerals.put("IX", 9);
+        roman_numerals.put("V", 5);
+        roman_numerals.put("IV", 4);
+        roman_numerals.put("I", 1);
+        String res = "";
+        for(Map.Entry<String, Integer> entry : roman_numerals.entrySet()){
+            int matches = Int/entry.getValue();
+            res += repeat(entry.getKey(), matches);
+            Int = Int % entry.getValue();
+        }
+        return res;
+    }
+    public static String repeat(String s, int n) {
+        if(s == null) {
+            return null;
+        }
+        final StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < n; i++) {
+            sb.append(s);
+        }
+        return sb.toString();
     }
 }
